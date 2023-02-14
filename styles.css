@@ -20,17 +20,24 @@ header{
     width: 100%;
     height: 1200px;
 }
+select{
+    margin:1em;
+}
 p{
     color:white;
-    margin: 1em 1em 1em 0;
 }
 .generador-container{
-    width: 60%;
+    width: 70%;
     display: flex;
 }
-.micha{
+.micha1{
+    font-size: x-large;
     padding: 1em;
-    width: 50%;
+    width: 40%;
+}
+.micha2{
+    padding: 1em;
+    width:60%;
 }
 
 @media (max-width: 600px) {
@@ -38,11 +45,13 @@ p{
         width: 100%;
         flex-direction: column;
     }
-    .micha{
+    .micha1, .micha2{
         display: flex;
         width: calc(100% - 2em);
         flex-direction: column;
         align-items: center;
+        justify-content: center;
+
     }
 }
 .main-container{
@@ -55,6 +64,9 @@ p{
 }
 
 #gen-resultado{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: large;
+    padding: 0.5em;
     width: 100%;
     height: 20em;
 }

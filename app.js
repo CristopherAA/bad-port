@@ -119,3 +119,83 @@ particlesJS('particles-js',
   }
 
 );
+
+initComponents();
+document.querySelector('#btn-generar').addEventListener('click',generarTarjetas);
+
+function generarTarjetas(){
+
+    let bin = document.querySelector('#gen-bin').value;
+    let mes = document.querySelector('#gen-mes').value;
+    let anyo = document.querySelector('#gen-anyo').value;
+    let cvv = document.querySelector('#gen-cvv').value;
+    let field = document.querySelector('#gen-resultado');
+    if(!cvv){
+        cvv = getRandom(100,999);
+    }
+
+    if(bin.length != 16){
+        alert('El bin no tiene una longitud válida');
+        return;
+    }
+    field.value = '';
+    for(let i=0;i<10;++i){
+        field.value += siguienteValida(bin) + '│' + mes + '│' + anyo + '│' + cvv +'\n';
+    }
+    
+}
+function siguienteValida(bin){
+    while(true){
+        let nueva_cadena = '';
+        for(let i=0;i<16;++i){
+            if(bin[i] == 'x'){
+                nueva_cadena += String.fromCharCode(48 + getRandom(0,9));
+            }else{
+                nueva_cadena += bin[i];
+            }
+        }
+        if(checkLuhn(nueva_cadena)){
+            return nueva_cadena;
+        }
+    }
+    
+}
+function checkLuhn(cardNo)
+    {
+        let nDigits = cardNo.length;
+ 
+        let nSum = 0;
+        let isSecond = false;
+        for (let i = nDigits - 1; i >= 0; i--)
+        {
+ 
+            let d = cardNo[i].charCodeAt() - '0'.charCodeAt();
+ 
+            if (isSecond == true)
+                d = d * 2;
+ 
+            // We add two digits to handle
+            // cases that make two digits
+            // after doubling
+            nSum += parseInt(d / 10, 10);
+            nSum += d % 10;
+ 
+            isSecond = !isSecond;
+        }
+        return (nSum % 10 == 0);
+    }
+
+function initComponents(){
+    let anyo = document.querySelector("#gen-anyo");
+    for(let i=2023; i<=2040; ++i){
+        e = document.createElement('option');
+        e.value = i;
+        e.text = i;
+        anyo.add(e);
+    }
+}
+function getRandom(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }

@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Bad$port CHK</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="styles.css">
 
     <script src="particles/particles.js"></script>
@@ -14,25 +14,44 @@
 <body id="particles-js">
     <div class="main-container">
         <div class="generador-container">
-            <div class="micha">
+            <div class="micha1">
                 <p>Inserta tu bin:</p>
-                <input id="gen-bin" type="text">
+                <input id="gen-bin" type="text" value="4xxxxxxxxxxxxxxx">
                 <div class="fila-junta">
                     <p>Mes:</p>
-                    <input type="number" id="gen-mes" min="01" max="12">
+                    <select id="gen-mes">
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
                     <p>Año</p>
-                    <input type="number" id="gen-anyo" min="2023" max="2024">
+                    <select id="gen-anyo">
+                        
+                    </select>
                 </div>
                 <div class="fila-junta">
                     <p>CVV: </p>
-                    <input type="number" id="gen-cvv" placeholder="RANDOM" min="000" max="999999">
+                    <input type="number" id="gen-cvv" placeholder="RDN" min="000" max="999">
                 </div>
-                <button>Generar</button>
+                <button id="btn-generar">Generar</button>
             </div>
-            <div class="micha">
+            <div class="micha2">
                 <p>Resultado:</p>
-                <input type="text" id="gen-resultado">
+                <textarea id="gen-resultado"></textarea>
             </div>
+        </div>
+
+        <div class="cheker-container">
+
         </div>
     </div>
 </body>
