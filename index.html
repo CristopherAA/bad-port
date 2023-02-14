@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bad$port CHK</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="particles/particles.js"></script>
+    <script src="app.js" defer></script>
+</head>
+<header>
+    <h1>Bienvenidx a Bad$port CHK</h1>
+</header>
+<body id="particles-js">
+    <div class="main-container">
+        <div class="generador-container">
+            <div class="micha">
+                <p>Inserta tu bin:</p>
+                <input id="gen-bin" type="text">
+                <div class="fila-junta">
+                    <p>Mes:</p>
+                    <input type="number" id="gen-mes" min="01" max="12">
+                    <p>Año</p>
+                    <input type="number" id="gen-anyo" min="2023" max="2024">
+                </div>
+                <div class="fila-junta">
+                    <p>CVV: </p>
+                    <input type="number" id="gen-cvv" placeholder="RANDOM" min="000" max="999999">
+                </div>
+                <button>Generar</button>
+            </div>
+            <div class="micha">
+                <p>Resultado:</p>
+                <input type="text" id="gen-resultado">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

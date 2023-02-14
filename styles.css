@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=swap');
+
+*{
+    font-family: 'Arial';
+    background-color: none;
+}
+body{
+    margin: 0;
+}
+
+h1,h2,h3,h4,h5{
+    color:white;
+}
+header{
+    text-align: center;
+}
+
+#particles-js{
+    background-color: black;
+    width: 100%;
+    height: 1200px;
+}
+p{
+    color:white;
+    margin: 1em 1em 1em 0;
+}
+.generador-container{
+    width: 60%;
+    display: flex;
+}
+.micha{
+    padding: 1em;
+    width: 50%;
+}
+
+@media (max-width: 600px) {
+    .generador-container{
+        width: 100%;
+        flex-direction: column;
+    }
+    .micha{
+        display: flex;
+        width: calc(100% - 2em);
+        flex-direction: column;
+        align-items: center;
+    }
+}
+.main-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+}
+
+#gen-resultado{
+    width: 100%;
+    height: 20em;
+}
+
+#gen-mes{
+    margin-right: 1em;
+}
+
+.fila-junta{
+    display: flex;
+    align-items: center;
+}
