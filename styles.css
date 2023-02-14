@@ -31,9 +31,12 @@ p{
     display: flex;
 }
 .micha1{
-    font-size: x-large;
+    font-size: large;
     padding: 1em;
     width: 40%;
+}
+.micha1 > input{
+    font-size: large;
 }
 .micha2{
     padding: 1em;
@@ -46,12 +49,16 @@ p{
         flex-direction: column;
     }
     .micha1, .micha2{
+        font-size: medium;
         display: flex;
         width: calc(100% - 2em);
         flex-direction: column;
         align-items: center;
         justify-content: center;
 
+    }
+    .micha1 > input{
+        font-size: medium;
     }
 }
 .main-container{

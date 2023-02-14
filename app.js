@@ -130,9 +130,7 @@ function generarTarjetas(){
     let anyo = document.querySelector('#gen-anyo').value;
     let cvv = document.querySelector('#gen-cvv').value;
     let field = document.querySelector('#gen-resultado');
-    if(!cvv){
-        cvv = getRandom(100,999);
-    }
+    let vacio = !cvv;
 
     if(bin.length != 16){
         alert('El bin no tiene una longitud válida');
@@ -140,6 +138,9 @@ function generarTarjetas(){
     }
     field.value = '';
     for(let i=0;i<10;++i){
+        if(vacio){
+            cvv = getRandom(100,999);
+        }
         field.value += siguienteValida(bin) + '│' + mes + '│' + anyo + '│' + cvv +'\n';
     }
     
