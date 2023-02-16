@@ -33,34 +33,17 @@ p{
 .micha1{
     font-size: large;
     padding: 1em;
-    width: 40%;
+    width: 35%;
 }
 .micha1 > input{
     font-size: large;
 }
 .micha2{
     padding: 1em;
-    width:60%;
+    width:65%;
 }
 
-@media (max-width: 600px) {
-    .generador-container{
-        width: 100%;
-        flex-direction: column;
-    }
-    .micha1, .micha2{
-        font-size: medium;
-        display: flex;
-        width: calc(100% - 2em);
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
 
-    }
-    .micha1 > input{
-        font-size: medium;
-    }
-}
 .main-container{
     width: 100%;
     display: flex;
@@ -85,4 +68,58 @@ p{
 .fila-junta{
     display: flex;
     align-items: center;
+}
+button{
+    margin: 1em 0em;
+    background-color: black;
+    border: 1px solid white;
+    padding: 0.5em;
+    color: white;
+    cursor: pointer;
+
+}
+.cheker-container{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+#cookie{
+    width: 80%;
+    height: 5em;
+    max-width: 500px;
+}
+.loading{
+    width: 1em;
+}
+.footer{
+    color: white;
+    margin: 10em 0 0 0;
+}
+@media (max-width: 600px) {
+    .generador-container{
+        width: 100%;
+        flex-direction: column;
+    }
+    .micha1, .micha2{
+        font-size: medium;
+        display: flex;
+        width: calc(100% - 2em);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+    }
+    #cookie{
+        width: 60%;
+    }
+    .micha1 > input{
+        font-size: medium;
+    }
+    #gen-resultado{
+        width: 85%;
+    }
+
+    
 }

@@ -42,6 +42,10 @@
                     <p>CVV: </p>
                     <input type="number" id="gen-cvv" placeholder="RDN" min="000" max="999">
                 </div>
+                <div class="fila-junta">
+                    <p>Cantidad: </p>
+                    <input type="number" id="gen-num" min="0" max="50">
+                </div>
                 <button id="btn-generar">Generar</button>
             </div>
             <div class="micha2">
@@ -49,10 +53,30 @@
                 <textarea id="gen-resultado"></textarea>
             </div>
         </div>
+        <p>Inserta tu cookie de Amazon MX:</p>
+        <textarea id="cookie"></textarea>
+        <button id="btn-buscar">Buscar lives</button>
 
-        <div class="cheker-container">
+        <div class="cheker-container">    
+            <h3>ESTADO:</h3>
+            <img class="loading" src="loading.gif" autoplay> 
+            <p id="p-estado"></p>
+                       
+            <h3 id="lives-cont">LIVES:</h3>
+            <div id="lives">
+
+            </div>
+            <h3 id="dead-cont">DEAD:</h3>
+            <div id="dead">
+
+            </div>
 
         </div>
+        <div class="footer">
+            <p>Todos los derechos reservados</p>
+        </div>
     </div>
+    
 </body>
+
 </html>

